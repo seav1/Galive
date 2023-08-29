@@ -58,7 +58,7 @@ def keepAlive(broswer: Chrome, user, passwd, terminalUrl = ""):
     while 1:
         broswer.get(terminalUrl)
         broswer.implicitly_wait(30)
-        sleep(7200)
+        sleep(120)
     return 0
 
 def main():
