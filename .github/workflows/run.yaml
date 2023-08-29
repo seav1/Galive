@@ -22,4 +22,3 @@ jobs:
       - run: |
           pip3 install -q selenium==4.9.0
           python3 ./main.py -U ${{ secrets.USERNAME }} -P ${{ secrets.PASSWORD }} -C ${{ secrets.URL }}
-          curl ${{ secrets.URL }}
