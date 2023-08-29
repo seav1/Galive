@@ -4,6 +4,8 @@ on:
     branches: [ "main" ]
   schedule:
     - cron: '0 */2 * * *'
+  workflow_dispatch:
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,4 +21,4 @@ jobs:
       
       - run: |
           pip3 install -q selenium==4.9.0
-          python3 ./main.py -U 11@seav.tk -P Aa@12345678 -C https://ide-run.goorm.io/workspace/dtazcsE8wt5JBD5v9vk
+          python3 ./main.py -U ${{ secrets.USERNAME }} -P ${{ secrets.PASSWORD }} -C ${{ secrets.URL }}
