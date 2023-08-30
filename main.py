@@ -15,7 +15,7 @@ def searchTerminalUrl(broswer:Chrome):
                 return linkhref
     return 1
 
-def keepAlive(broswer: Chrome, user, passwd, terminalUrl = "https://ide-run.goorm.io/terminal/dtazcsE8wt5JBD5v9vk"):
+def keepAlive(broswer: Chrome, user, passwd, terminalUrl = ""):
     print("Loading Login Page...", end='', flush=True)
     login_url = "https://accounts.goorm.io/login?return_url=aHR0cHM6Ly9pZGUuZ29vcm0uaW8vbXkvZGFzaGJvYXJk&keep_login=true"
     broswer.get(login_url)
@@ -61,7 +61,7 @@ def keepAlive(broswer: Chrome, user, passwd, terminalUrl = "https://ide-run.goor
     return 0
 
 def main():
-    terminalUrl = "https://ide-run.goorm.io/terminal/dtazcsE8wt5JBD5v9vk"
+    terminalUrl = ""
     chromeOptions = Options()
     chromeOptions.add_argument("--no-sandbox")
     chromeOptions.add_argument("--single-process")
