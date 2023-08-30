@@ -56,7 +56,8 @@ def keepAlive(broswer: Chrome, user, passwd, terminalUrl = ""):
                 break
     print("\rStart KeepAlive Workflow!Enjot it!", end='', flush=True)
     broswer.get(terminalUrl)
-    broswer.implicitly_wait(120)
+    broswer.implicitly_wait(30)
+    sleep(120)
     return 0
 
 def main():
