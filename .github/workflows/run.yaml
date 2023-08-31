@@ -1,16 +1,40 @@
-name: Open website
+name: Open Website
+
 on:
-  schedule:
-    - cron: '0 * * * *'
   workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
 
 jobs:
-  open-website:
+  open_website:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Open website
-        uses: actions/shell@v2
-        with:
-          args: |
-            xdg-open https://ide-run.goorm.io/workspace/d9Sssb0cUEnisCoRCgX?token=d04702b4519674ab9a512f72b1bae53d&guestname=12
-            sleep 60
+    - name: Checkout repository
+      uses: actions/checkout@v2
+  
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+  
+    - name: Install dependencies
+      run: pip install requests
+  
+    - name: Open website and wait
+      run: |
+        python - <<EOF
+        import requests
+        import time
+        
+        def visit_website(url):
+            # 发起 GET 请求
+            response = requests.get(url)
+            
+            # 等待1分钟
+            time.sleep(60)
+        
+        if __name__ == '__main__':
+            url = 'https://ide-run.goorm.io/workspace/d9Sssb0cUEnisCoRCgX?token=d04702b4519674ab9a512f72b1bae53d&guestname=12'  # 替换成你想要访问的网址
+            visit_website(url)
+        EOF
