@@ -1,19 +1,25 @@
 name: Open Website
+
 on:
   schedule:
-    # 每小时运行一次
-    - cron: '0 * * * *'
-  # 添加手动启动
-  workflow_dispatch:
+    - cron: '0 * * * *'  # 每小时运行一次
+  workflow_dispatch:  # 手动启动
 
 jobs:
   open-website:
     runs-on: ubuntu-latest
-    env:
-      WEBSITE_URL: 'https://ide-run.goorm.io/workspace/d9Sssb0cUEnisCoRCgX?token=d04702b4519674ab9a512f72b1bae53d&guestname=12'
+
     steps:
-      - uses: actions/setup-node@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: 16.x
-      - run: |
-        node -e "require('puppeteer').launch({ headless: false }).goto('${{ env.WEBSITE_URL }}').waitForNavigation().close()"
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Open website
+        run: node open-website.js
