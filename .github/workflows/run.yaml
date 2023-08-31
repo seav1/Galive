@@ -46,4 +46,4 @@ jobs:
           
       - name: Checkin
         run: |  
-          xvfb-run python open-website.py
+          xvfb-run python3 ./main.py
