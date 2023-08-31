@@ -1,24 +1,16 @@
-name: KeepAlive
-on: 
-  push:
-    branches: [ "main" ]
+name: Open website
+on:
   schedule:
-    - cron: '0 */2 * * *'
+    - cron: '0 * * * *'
   workflow_dispatch:
-  
+
 jobs:
-  build:
+  open-website:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-python@v4
+      - name: Open website
+        uses: actions/shell@v2
         with:
-          python-version: '3.10' 
-
-      - name: Check out code 
-        uses: actions/checkout@v3
-      
-      - uses: nanasess/setup-chromedriver@v2
-      
-      - run: |
-          pip3 install -q selenium==4.9.0
-          python3 ./keepalive.py
+          args: |
+            xdg-open https://ide-run.goorm.io/workspace/d9Sssb0cUEnisCoRCgX?token=d04702b4519674ab9a512f72b1bae53d&guestname=12
+            sleep 60
