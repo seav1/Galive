@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "open-website": "node openWebsite.js"
+  },
+  "dependencies": {
+    "puppeteer": "^10.2.0"
+  }
+}
