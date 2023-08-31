@@ -1,17 +1,15 @@
-import time
-from selenium import webdriver
+const puppeteer = require('puppeteer');
 
-# 指定要访问的网址
-url = "https://ide-run.goorm.io/workspace/d9Sssb0cUEnisCoRCgX?token=d04702b4519674ab9a512f72b1bae53d&guestname=12"
+(async () => {
+  const browser = await puppeteer.launch({ headless: false });
+  const page = await browser.newPage();
 
-# 启动一个 Chrome 浏览器
-driver = webdriver.Chrome()
+  // 打开指定的网站
+  await page.goto('https://ide-run.goorm.io/workspace/d9Sssb0cUEnisCoRCgX?token=d04702b4519674ab9a512f72b1bae53d&guestname=12');
 
-# 访问网址
-driver.get(url)
+  // 等待1分钟
+  await page.waitForTimeout(60000);
 
-# 等待 1 分钟
-time.sleep(60)
-
-# 关闭浏览器
-driver.close()
+  // 关闭浏览器
+  await browser.close();
+})();
