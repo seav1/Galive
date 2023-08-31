@@ -1,40 +1,30 @@
 name: Open Website
 
 on:
-  workflow_dispatch:
   schedule:
     - cron: "0 * * * *"
+  workflow_dispatch:
 
 jobs:
   open_website:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-  
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-  
-    - name: Install dependencies
-      run: pip install requests
-  
-    - name: Open website and wait
-      run: |
-        python - <<EOF
-        import requests
-        import time
-        
-        def visit_website(url):
-            # 发起 GET 请求
-            response = requests.get(url)
-            
-            # 等待1分钟
-            time.sleep(60)
-        
-        if __name__ == '__main__':
-            url = 'https://ide-run.goorm.io/workspace/d9Sssb0cUEnisCoRCgX?token=d04702b4519674ab9a512f72b1bae53d&guestname=12'  # 替换成你想要访问的网址
-            visit_website(url)
-        EOF
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Open website
+        run: |
+          # 安装必要的依赖（例如，Chrome浏览器）
+          # 这里的命令根据你的具体需求进行修改
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser
+
+          # 打开网站（这里以示例网站 https://example.com 为例）
+          chromium-browser --headless --disable-gpu --remote-debugging-port=9222 https://ide-run.goorm.io/workspace/d9Sssb0cUEnisCoRCgX?token=d04702b4519674ab9a512f72b1bae53d&guestname=12 &
+
+          # 等待1分钟
+          sleep 60
+
+          # 关闭 Chrome 进程
+          kill $(pgrep chromium-browser)
