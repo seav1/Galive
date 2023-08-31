@@ -1,11 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 name: Checkin
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "dev" ]
-#   pull_request:
-#     branches: [ "main" ]
   schedule:
     # UTC (国内 UTC+8)
     - cron: '01 4 * * *'
@@ -15,8 +10,7 @@ on:
 jobs:
   Checkin:
     runs-on: ubuntu-latest
-    # 超时设置
-    timeout-minutes: 10
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -51,10 +45,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Checkin
-        env:
-          URL_USER_PASSWD: ${{ secrets.URL_USER_PASSWD }}
-          BARK_TOKEN: ${{ secrets.BARK_TOKEN }}
-          TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-          TG_USER_ID: ${{ secrets.TG_USER_ID }}
         run: |  
           xvfb-run python3 ./open-website.js
