@@ -1,9 +1,7 @@
-import time
 from xvfbwrapper import Xvfb
 from seleniumbase import BaseCase
 
 class MyTestClass(BaseCase):
-
     def setUp(self):
         super().setUp()
         self.headless = True  # 设置无头模式
