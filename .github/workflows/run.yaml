@@ -47,4 +47,4 @@ jobs:
           
       - name: Checkin
         run: |  
-          python3 web_access.py
+          python3 ./web_access.py
