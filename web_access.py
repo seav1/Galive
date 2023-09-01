@@ -8,6 +8,10 @@ class MyTestClass(BaseCase):
 
     def test_basic(self):
         self.open('https://ide-run.goorm.io/workspace/dGz54pALkYySfIqjBmp?token=ce166f5eccf285db2d818ed4c65a7c12&guestname=12')
+        time.sleep(60)  # 保持1分钟
+
+    def quit(self):
+        self.driver.quit()
 
 def run_test():
     test = MyTestClass()
