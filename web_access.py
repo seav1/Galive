@@ -4,7 +4,7 @@ class MyTestClass(BaseCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        config.set_headless_browser(True)  # 设置无头模式
+        config.set_headless_browser(False)  # 取消无头模式
 
     def test_basic(self):
         self.open('https://ide-run.goorm.io/workspace/dGz54pALkYySfIqjBmp?token=ce166f5eccf285db2d818ed4c65a7c12&guestname=12')
