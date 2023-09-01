@@ -1,10 +1,10 @@
 from xvfbwrapper import Xvfb
-from seleniumbase import BaseCase
+from seleniumbase import BaseCase, config
 
 class MyTestClass(BaseCase):
     def setUp(self):
         super().setUp()
-        self.headless = True  # 设置无头模式
+        config.set_headless(True)  # 设置无头模式
 
     def test_basic(self):
         self.open('https://ide-run.goorm.io/workspace/dGz54pALkYySfIqjBmp?token=ce166f5eccf285db2d818ed4c65a7c12&guestname=12')
