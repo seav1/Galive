@@ -17,11 +17,3 @@ def run_test():
             test.test_basic()
         finally:
             test.tearDown()
-
-scheduler = sched.scheduler(time.time, time.sleep)
-def schedule_test():
-    scheduler.enter(20*60, 1, run_test, ())  # 每20分钟运行一次
-    scheduler.run()
-
-if __name__ == "__main__":
-    schedule_test()
