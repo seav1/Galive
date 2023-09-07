@@ -1,31 +1,28 @@
-name: Keep Goorm Alive
+name: Visit Website
 
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:  # 允许手动触发
   schedule:
-    - cron: '0 * * * *'  # 每小时运行一次
+    - cron: '0 */3 * * *'
+  workflow_dispatch:
 
 jobs:
-  build:
-
+  visit-website:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v2
-
-    - name: Set up Python
+      
+    - name: Setup Python
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        sudo apt-get update
+        sudo apt-get install -y chromium-chromedriver
+        sudo cp /usr/lib/chromium-browser/chromedriver /usr/bin
+        pip install basecase selenium
 
-    - name: Run SeleniumBase script
-      run: |
-        pytest goorm.py
+    - name: Run goorm.py
+      run: python goorm.py
