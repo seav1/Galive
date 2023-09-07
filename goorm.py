@@ -1,4 +1,6 @@
-class VisitGoormioPage(BaseCase):
+import seleniumbase
+
+class VisitGoormioPage(seleniumbase.BaseCase):
 
     def __init__(self, driver):
         super().__init__()
