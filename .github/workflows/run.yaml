@@ -21,7 +21,6 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y chromium-chromedriver
-        sudo cp /usr/lib/chromium-browser/chromedriver /usr/bin
         pip install basecase selenium
 
     - name: Run goorm.py
