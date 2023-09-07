@@ -1,34 +1,39 @@
-name: Visit Goormio Page
+name: Tor Selenium Action
 
 on:
   schedule:
-    # Runs every 3 hours
-    - cron: '0 */3 * * *'
+    - cron: "0 */3 * * *"
   workflow_dispatch:
-    # Allows you to manually trigger the action
 
 jobs:
-  visit:
+  browse:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v2
 
     - name: Setup Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: 3.8
 
     - name: Install dependencies
       run: |
+        sudo apt-get update
+        sudo apt-get install tor
         pip install seleniumbase
 
-    - name: Visit the page
+    - name: Visit the website using SeleniumBase and Tor
       run: |
-        echo "Setting up tor..."
-        sudo apt-get install tor
-        sudo service tor start
-
-        echo "Running selenium script..."
-        pytest goorm.py
+        tor &
+        git clone https://github.com/seleniumbase/SeleniumBase.git
+        cd SeleniumBase/examples/
+        echo 'from seleniumbase import BaseCase
+        import time
+        class MyTestClass(BaseCase):
+            def test_tor_browser(self):
+                self.open("https://ide-run.goorm.io/workspace/dO8D4ys44ocxrovRqIA?token=0312731cf35a27ab2f073e3553c775dc&guestname=13")
+                time.sleep(60)
+        ' > tor_test.py
+        pytest tor_test.py
