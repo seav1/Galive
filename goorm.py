@@ -1,10 +1,8 @@
-from seleniumbase import BaseCase
-
 class VisitGoormioPage(BaseCase):
 
-    def __init__(self):
+    def __init__(self, driver):
         super().__init__()
-        self.driver = self.create_driver()
+        self.driver = driver
         self.set_proxy_server("127.0.0.1:9050")
 
     def test_visit_page(self):
@@ -12,5 +10,5 @@ class VisitGoormioPage(BaseCase):
         self.sleep(60)
 
 if __name__ == "__main__":
-    case = VisitGoormioPage()
+    case = VisitGoormioPage(driver=webdriver.Chrome())
     case.test_visit_page()
