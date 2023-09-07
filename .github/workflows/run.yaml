@@ -31,4 +31,4 @@ jobs:
         sudo service tor start
 
         echo "Running selenium script..."
-        python goorm.py
+        pytest goorm.py
