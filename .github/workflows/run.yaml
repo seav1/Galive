@@ -1,17 +1,20 @@
-name: Visit Website
+name: Visit Goormio Page
 
 on:
   schedule:
+    # Runs every 3 hours
     - cron: '0 */3 * * *'
   workflow_dispatch:
+    # Allows you to manually trigger the action
 
 jobs:
-  visit-website:
+  visit:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v2
-      
+
     - name: Setup Python
       uses: actions/setup-python@v2
       with:
@@ -19,9 +22,13 @@ jobs:
 
     - name: Install dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install -y chromium-chromedriver
-        pip install basecase selenium
+        pip install seleniumbase
 
-    - name: Run goorm.py
-      run: python goorm.py
+    - name: Visit the page
+      run: |
+        echo "Setting up tor..."
+        sudo apt-get install tor
+        sudo service tor start
+
+        echo "Running selenium script..."
+        python goorm.py
