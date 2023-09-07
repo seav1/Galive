@@ -17,6 +17,9 @@ class VisitGoormioPage(seleniumbase.BaseCase):
         self.driver.get("https://ide-run.goorm.io/workspace/dO8D4ys44ocxrovRqIA?token=0312731cf35a27ab2f073e3553c775dc&guestname=13")
         self.sleep(60)
 
+    def runTest(self):
+        self.test_visit_page()
+
 if __name__ == "__main__":
     case = VisitGoormioPage(driver=webdriver.Chrome())
-    case.test_visit_page()
+    case.runTest()
